@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.ckpt
+results/
+data/
+*.zip
+.kaggle/
+access_token
+kaggle.json
+.env
