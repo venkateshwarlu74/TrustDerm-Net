@@ -38,6 +38,8 @@ def find(pattern):
 # link outputs of earlier stages (manifest + image cache + checkpoints)
 links = []
 man = find("manifest.csv")
+man = [p for p in man if os.path.exists(os.path.join(os.path.dirname(p), "cache.zip"))] or man   # prep output first
+print("manifest:", man[:1], flush=True)
 if man and not os.path.exists(os.path.join(W, "manifest.csv")):
     shutil.copy(man[0], W)
     cz = os.path.join(os.path.dirname(man[0]), "cache.zip")

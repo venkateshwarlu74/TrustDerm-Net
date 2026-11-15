@@ -1,4 +1,4 @@
-"""Figs. 4-7 of the paper (Section V) from the saved prediction files.
+﻿"""Figs. 4-7 of the paper (Section V) from the saved prediction files.
 
 Style: IEEE widths (3.5 in single column, 7.16 in double), 8 pt fonts, Okabe-Ito colour-blind-safe palette,
 vector PDF/SVG plus 300 dpi PNG. Curves are averaged over all fold models (mean, with +-1 SD band where
@@ -224,11 +224,12 @@ def risk_coverage(ds, score):
     return cov, out.mean(0), out.std(0, ddof=1)
 
 
-LABEL_POS = {  # (dx, dy, ha) in points; short names, parameter count is shown by marker size and Table VIII
-    "TrustDerm-Net": ("Ours", -7, 5, "right"), "MobileNetV2": ("MobileNetV2", 7, 0, "left"),
-    "EfficientNet-B3": ("EffNet-B3", 0, 9, "center"), "ResNet-50": ("ResNet-50", -5, -11, "right"),
-    "DeiT-S": ("DeiT-S", 0, -11, "center"), "Swin-T": ("Swin-T", -7, 8, "right"),
-    "ConvNeXt-T": ("ConvNeXt-T", 8, 0, "left")}
+LABEL_POS = {  # (dx, dy, ha) in points; short names, parameter count is shown by marker size and Table VIII.
+    # Each label sits off its own marker with a thin leader line, so no label lies next to another model's marker.
+    "TrustDerm-Net": ("Ours", 8, 12, "left"), "MobileNetV2": ("MobileNetV2", -8, -30, "left"),
+    "EfficientNet-B3": ("EffNet-B3", -3, -11, "left"), "ResNet-50": ("ResNet-50", 8, -9, "left"),
+    "DeiT-S": ("DeiT-S", 8, -8, "left"), "Swin-T": ("Swin-T", -7, 9, "right"),
+    "ConvNeXt-T": ("ConvNeXt-T", 7, -7, "left")}
 
 
 def fig7(runs):
@@ -277,7 +278,9 @@ def fig7(runs):
         short, dx, dy, ha = LABEL_POS.get(lab, (lab, 5, 0, "left"))
         ax.annotate(short, (e.latency_ms_median, np.mean(ba)), xytext=(dx, dy),
                     textcoords="offset points", fontsize=6, va="center", ha=ha,
-                    color=OI["blue"] if tag == FULL else "black")
+                    color=OI["blue"] if tag == FULL else "black",
+                    arrowprops=dict(arrowstyle="-", color=OI["grey"], lw=0.4, shrinkA=0, shrinkB=2.5),
+                    bbox=dict(boxstyle="round,pad=0.1", fc="white", ec="none", alpha=0.85), zorder=5)
     ax.set_xlim(35, 215)
     ax.set_xlabel("CPU latency, ms (median, 4 threads)"); ax.set_ylabel("Balanced accuracy")
     ax.set_title("bAcc (HAM test) vs. latency")

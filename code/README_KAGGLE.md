@@ -78,4 +78,4 @@ Timm backbone names for the baselines: `resnet50`, `efficientnet_b3`, `mobilenet
 
 ## 4. What to send back for Step 5
 
-Download `/kaggle/working/results/` and `/kaggle/working/preds/`, plus the `*_log.csv` files in `ckpt/`, and put them in `Desktop\Paper2\results\`. Step 5 builds Tables IV–VIII and Figs. 4–8 directly from these files.
+Download `/kaggle/working/results/` and `/kaggle/working/preds/`, plus the `*_log.csv` files in `ckpt/`, and put them in `results\`. Step 5 builds Tables IV–VIII and Figs. 4–8 directly from these files.
