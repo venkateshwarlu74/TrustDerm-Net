@@ -41,10 +41,24 @@ The thresholds come from `results\student_eval_v2\results\student_fold{0..4}.jso
 - **GUI.** It was opened and tested on a melanoma test image (ISIC_0027263): screen-positive, confident, melanoma 89% (five-fold ensemble).
 - **Same weights as the published record (2026-11-16).** The five checkpoints are identical to those in the Zenodo deposit (doi:10.5281/zenodo.24216402). Section, equation, table and figure numbers above refer to the manuscript submitted to *Computerized Medical Imaging and Graphics*.
 
+## Benign / malignant only version
+
+`trustderm_binary_gui.py` (launcher `Run_TrustDerm_Binary_GUI.bat`) is a simpler screen for users who only need the benign/malignant decision. It uses the same five fold models, thresholds and preprocessing as the full app, and shows:
+
+- the result: **Likely benign** (screen-negative) or **Possibly malignant: needs review** (screen-positive), from P(malignant) ≥ t_mal (Eq. (21));
+- P(malignant) on a bar with the threshold marked (square-root scale, so the low threshold of about 0.015 stays visible);
+- the referral flag from the uncertainty u (Eqs. (14b), (22)), exactly as in the full app;
+- a Grad-CAM map of the benign/malignant decision: the gradient of log P(malignant) for a screen-positive result, or of log P(benign) for a screen-negative one. The full app's map explains the 7-class prediction instead.
+
+"Malignant" means melanoma, basal cell carcinoma or actinic keratosis / SCC, as in the paper. Command line: `python app\trustderm_binary_gui.py --cli IMAGE --age 60 --sex male --site torso --model ens`.
+
+Check (2026-11-16): on all 22 demo images it gives the triage and referral results listed in `demo_images\demo_cases.csv`, with P(malignant) and u identical to the full app.
+
 ## Files
 
 - `trustderm_gui.py`: the app. It uses `code\model.py`, `code\preprocess.py` and `code\data.py` unchanged.
 - `Run_TrustDerm_GUI.bat`: double-click launcher.
+- `trustderm_binary_gui.py` + `Run_TrustDerm_Binary_GUI.bat`: the benign/malignant-only app (see above).
 - It needs Python with torch, timm, torchvision, OpenCV and Pillow. All are already installed on this PC; nothing new was installed.
 - The model weights are in `results\student_v1\ckpt\student_fold{0..4}.pt` (about 21 MB each).
 

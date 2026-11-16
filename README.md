@@ -23,7 +23,7 @@ TrustDerm-Net is a 5.6 M-parameter MobileViT student distilled from a ConvNeXt-B
 |---|---|
 | `code/` | Data manifest, preprocessing, model, losses, training, evaluation, efficiency measurement, and `frozen_splits.csv` (the split of every image) |
 | `_tools/` | Kaggle launcher and five-fold queue, fold merging, statistics, figures, Grad-CAM faithfulness, ISIC 2020 and distillation-temperature analyses, Zenodo deposit builder |
-| `app/` | Tkinter desktop demo (see `app/README_GUI.md`) |
+| `app/` | Tkinter desktop demos: full app and benign/malignant-only app (see `app/README_GUI.md`) |
 
 ## Setup
 
