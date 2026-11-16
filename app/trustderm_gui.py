@@ -34,7 +34,8 @@ CONCEPT_NAMES = {"atypical_network": "Atypical pigment network", "blue_whitish_v
                  "irregular_dots_globules": "Irregular dots/globules", "irregular_blotches": "Irregular blotches",
                  "regression": "Regression structures"}
 DISCLAIMER = ("Research prototype — not a medical device. Not for diagnosis. Trained on dermoscopic images "
-              "(HAM10000); unreliable on ordinary phone photos (melanoma AUROC 0.43 on PAD-UFES-20).")
+              "(HAM10000). Melanoma AUROC was 0.76 on external dermoscopic images (ISIC 2020) but only 0.43 "
+              "on ordinary phone photos (PAD-UFES-20), so it is unreliable on phone photos.")
 torch.set_num_threads(4)
 
 
@@ -122,7 +123,7 @@ def report(r, path):
              "",
              f"Triage: {'SCREEN-POSITIVE (review)' if r['malignant_flag'] else 'screen-negative'}"
              f"   P(malignant) = {r['p_mal']:.3f}  (threshold {r['t_mal']:.3f}, set for 95% sensitivity;\n"
-             f"        on the HAM10000 test set it caught about 96% of malignant lesions but also flagged ~40% of benign ones)",
+             f"        on the HAM10000 test set it caught 95.5% of malignant lesions but also flagged ~40% of benign ones)",
              f"Uncertainty u = {r['u']:.3f}  (referral threshold {r['tau']:.3f})  ->  "
              f"{'REFER to a dermatologist' if r['refer'] else 'confident'}",
              f"Most likely class: {NAMES[CLASSES[r['pred']]]} ({r['p7'][r['pred']]:.1%})", "", "7-class probabilities:"]
@@ -301,7 +302,7 @@ def gui(start_image=None):
         else:
             triage_lbl.configure(text="Triage: screen-negative", foreground="#1a7f37")
         triage_sub.configure(text=f"P(malignant) = {r['p_mal']:.3f}; triage threshold {r['t_mal']:.3f} "
-                                  f"(high-sensitivity setting: catches ~97% of malignant lesions but also flags ~45% of benign ones). "
+                                  f"(high-sensitivity setting: catches ~95% of malignant lesions but also flags ~40% of benign ones). "
                                   f"Most likely: {NAMES[CLASSES[r['pred']]]} ({r['p7'][r['pred']]:.0%}).")
         if r["refer"]:
             refer_lbl.configure(text=f"⚠ Uncertain (u = {r['u']:.2f} > {r['tau']:.2f}): refer to a dermatologist",
