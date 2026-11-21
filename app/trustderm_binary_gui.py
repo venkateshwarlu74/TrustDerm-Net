@@ -3,7 +3,7 @@
 
 It uses the same five fold students, thresholds and preprocessing as trustderm_gui.py and the paper:
   - triage:   P(malignant) >= t_mal, set on validation data for 95% sensitivity (Eq. 21)
-  - referral: uncertainty u (Eq. 14b) > tau_u, the threshold that keeps 80% of validation cases (Eq. 22)
+  - referral: uncertainty u (Eq. 14) > tau_u, the threshold that keeps 80% of validation cases (Eq. 22)
 "Malignant" here means MEL, BCC or AKIEC (actinic keratosis / intraepithelial carcinoma, incl. SCC).
 
 Research prototype only. It is not a medical device and must not be used for diagnosis.

@@ -1,6 +1,6 @@
 # TrustDerm-Net
 
-Code for **TrustDerm-Net: Image–Metadata Fusion with Evidential Distillation for Uncertainty-Aware Skin Cancer Triage** (submitted to *Computerized Medical Imaging and Graphics*).
+Code for the paper **Compact, uncertainty-aware skin cancer triage from dermoscopic images and patient metadata with multi-dataset validation** (manuscript under review). The model is called TrustDerm-Net.
 
 TrustDerm-Net is a 5.6 M-parameter MobileViT student distilled from a ConvNeXt-B teacher. It combines a benign/malignant hierarchy, gated cross-attention fusion of image and patient metadata, evidential uncertainty for referral, and a concept head for the seven-point checklist.
 
@@ -38,7 +38,7 @@ Versions listed are those used for local analysis. Training ran on Kaggle GPUs; 
 1. Obtain the datasets below. No images are included here.
 2. Train the teacher, then the student, for folds 0–4 (`code/README_KAGGLE.md`). The queue in `_tools/five_fold_queue.py` shows the flags for the student, the eight ablations and the six baselines. All runs use seed 42.
 3. Merge and analyse: `_tools/merge_folds.py`, `_tools/step5_analysis.py`, `_tools/text_numbers.py`, `_tools/figs_results.py`.
-4. Grad-CAM: `_tools/gradcam_fig8.py`, then `_tools/faith_summary.py`. Set `HAM_ZIP` to the path of your HAM10000 zip.
+4. Grad-CAM (Fig. 7 of the paper): `_tools/gradcam_fig8.py`, then `_tools/faith_summary.py`. Set `HAM_ZIP` to the path of your HAM10000 zip. Some script names and comments use the figure numbers of an earlier draft (e.g. `gradcam_fig8.py`); the outputs are the same.
 5. ISIC 2020 (post hoc): `code/verify_dups.py` (second-stage NCC check of dHash candidates), `code/eval_external.py`, then `_tools/isic2020_analysis.py` (add `--ci` for the patient-level bootstrap). Distillation temperature: `_tools/tau_analysis.py`.
 
 For the Kaggle launcher, set `KAGGLE_USERNAME` and upload your own copy of Derm7pt as a private Kaggle dataset named `derm7pt-release-v0`.
@@ -62,4 +62,4 @@ Code: MIT (see `LICENSE`). Weights and data files on Zenodo: CC BY-NC 4.0, becau
 
 ## Citation
 
-Katineedi, V., Mudigonda, M. TrustDerm-Net: Image–Metadata Fusion with Evidential Distillation for Uncertainty-Aware Skin Cancer Triage. Submitted to *Computerized Medical Imaging and Graphics*, 2026. Full reference to be added on publication.
+Katineedi, V., Mudigonda, M. Compact, uncertainty-aware skin cancer triage from dermoscopic images and patient metadata with multi-dataset validation. Manuscript under review, 2026. Full reference to be added on publication.

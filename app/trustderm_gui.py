@@ -88,7 +88,7 @@ class Predictor:
 
     @staticmethod
     def _one(model, x, meta):
-        """Forward pass plus Grad-CAM for the predicted class (same method as Fig. 8 of the paper)."""
+        """Forward pass plus Grad-CAM for the predicted class (same method as Fig. 7 of the paper)."""
         store, orig = {}, model.encoder.forward_features
 
         def ff(inp):

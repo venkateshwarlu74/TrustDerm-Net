@@ -1,6 +1,6 @@
 # TrustDerm-Net: splits, near-duplicate lists, predictions and weights
 
-This record holds the research data behind the manuscript "TrustDerm-Net: Image–Metadata Fusion with Evidential Distillation for Uncertainty-Aware Skin Cancer Triage" (submitted to *Computerized Medical Imaging and Graphics*). With it, every number in Tables 4–8 and Supplementary Tables S1–S7 can be recomputed without retraining any model. Code: https://github.com/venkateshwarlu74/TrustDerm-Net
+This record holds the research data behind the manuscript "Compact, uncertainty-aware skin cancer triage from dermoscopic images and patient metadata with multi-dataset validation" (under review; model name TrustDerm-Net). With it, every number in the results tables (Tables 4–7) and the supplementary tables can be recomputed without retraining any model. Code: https://github.com/venkateshwarlu74/TrustDerm-Net
 
 **No images are included.** Obtain them from the original providers:
 

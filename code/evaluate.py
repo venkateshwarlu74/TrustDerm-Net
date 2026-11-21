@@ -121,7 +121,7 @@ def binary_metrics(d, t_mal, taus):
     if d.dataset.iloc[0] == "isic2020":    # malignant = melanoma in ISIC 2020
         r["mel_auroc"] = safe_auc(z, d[f"p_{CLASSES[MEL]}"].to_numpy())
     r.update(selective(d, flag == (z == 1), t_mal, taus))
-    if (d.skin_tone > 0).any():              # DDI fairness analysis (Eq. 27)
+    if (d.skin_tone > 0).any():              # skin-tone (Fitzpatrick) analysis; not used in the paper
         for st, g in d[d.skin_tone > 0].groupby("skin_tone"):
             zz, ff = g.z.to_numpy(), g.p_mal.to_numpy() >= t_mal
             r[f"auroc_FST{st}"] = safe_auc(zz, g.p_mal.to_numpy())

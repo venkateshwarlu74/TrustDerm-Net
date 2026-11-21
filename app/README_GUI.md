@@ -28,10 +28,10 @@ The models take about 10–20 s to load on this laptop. Each analysis then takes
 |---|---|---|
 | Model input | The image after hair removal, Shades-of-Gray colour correction and centre crop, exactly as in training | Section 3.3 |
 | Triage: screen-positive / screen-negative | Stage-1 P(malignant) compared with the threshold t_mal, which was set on validation for 95% sensitivity. On the HAM10000 test set it caught 95.5% of malignant lesions but also flagged about 40% of benign ones (specificity 59.8%). So "screen-positive" means "needs review", not "cancer". | Eq. (21), Section 3.10, Table 4 |
-| Model is confident / Refer to a dermatologist | Evidential uncertainty u = K/S compared with τ_u, the threshold that keeps 80% of validation cases (κ = 0.8) | Eqs. (14a–b), (22); Section 3.10; Table 7(a) |
+| Model is confident / Refer to a dermatologist | Evidential uncertainty u = K/S compared with τ_u, the threshold that keeps 80% of validation cases (κ = 0.8) | Eqs. (14), (22); Section 3.10; Table 6 |
 | Diagnosis probabilities | 7-class composite probabilities; red bars are malignant classes | Eq. (13) |
 | Seven-point checklist concepts | Concept-head probabilities; values ≥ 0.5 (dashed line) are shown in bold as "present" | Eq. (10); Section 3.6 |
-| Grad-CAM | The regions that raised the predicted class, averaged over the selected models | Section 5.6, Fig. 8 |
+| Grad-CAM | The regions that raised the predicted class, averaged over the selected models | Section 5.6, Fig. 7 |
 
 The thresholds come from `results\student_eval_v2\results\student_fold{0..4}.json`. For the ensemble, the app averages the five folds' probabilities, uncertainties and thresholds. That is a convenience for the demo and is not the protocol used in the paper, where each fold is evaluated separately.
 
@@ -39,7 +39,7 @@ The thresholds come from `results\student_eval_v2\results\student_fold{0..4}.jso
 
 - **Same predictions as the paper.** On 109 HAM10000 test images, the app (fold 0) agrees with the saved fold-0 predictions on the predicted class for 109/109 images. The largest probability difference is 0.013, which comes from JPEG re-encoding in the training cache.
 - **GUI.** It was opened and tested on a melanoma test image (ISIC_0027263): screen-positive, confident, melanoma 89% (five-fold ensemble).
-- **Same weights as the published record (2026-11-16).** The five checkpoints are identical to those in the Zenodo deposit (doi:10.5281/zenodo.24216402). Section, equation, table and figure numbers above refer to the manuscript submitted to *Computerized Medical Imaging and Graphics*.
+- **Same weights as the published record (2026-11-16).** The five checkpoints are identical to those in the Zenodo deposit (doi:10.5281/zenodo.24216402). Section, equation, table and figure numbers above refer to the manuscript currently under review (2026-11-21 version).
 
 ## Benign / malignant only version
 
@@ -47,7 +47,7 @@ The thresholds come from `results\student_eval_v2\results\student_fold{0..4}.jso
 
 - the result: **Likely benign** (screen-negative) or **Possibly malignant: needs review** (screen-positive), from P(malignant) ≥ t_mal (Eq. (21));
 - P(malignant) on a bar with the threshold marked (square-root scale, so the low threshold of about 0.015 stays visible);
-- the referral flag from the uncertainty u (Eqs. (14b), (22)), exactly as in the full app;
+- the referral flag from the uncertainty u (Eqs. (14), (22)), exactly as in the full app;
 - a Grad-CAM map of the benign/malignant decision: the gradient of log P(malignant) for a screen-positive result, or of log P(benign) for a screen-negative one. The full app's map explains the 7-class prediction instead.
 
 "Malignant" means melanoma, basal cell carcinoma or actinic keratosis / SCC, as in the paper. Command line: `python app\trustderm_binary_gui.py --cli IMAGE --age 60 --sex male --site torso --model ens`.
